@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RailEase — Modern Railway Booking</title>
+  <link href="https://googleapis.com" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="hero">
+    <div class="hero-content">
+      <div class="logo">🚆 RailEase</div>
+      <h1>Book Your Next Train Journey</h1>
+      <p>Instant tickets, live fare calculation, and hassle-free cancellations.</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Floating Search Card -->
+    <section class="card search-card">
+      <form id="searchForm" class="search-grid">
+        <div class="input-group">
+          <label for="fromStation">From Station</label>
+          <select id="fromStation" required>
+            <option value="">Select Origin</option>
+            <option value="New Delhi (NDLS)">New Delhi (NDLS)</option>
+            <option value="Mumbai Central (MMCT)">Mumbai Central (MMCT)</option>
+            <option value="Lucknow Charbagh (LKO)">Lucknow Charbagh (LKO)</option>
+            <option value="Bengaluru City (SBC)">Bengaluru City (SBC)</option>
+            <option value="Kolkata Howrah (HWH)">Kolkata Howrah (HWH)</option>
+          </select>
+        </div>
+
+        <button type="button" id="swapBtn" class="swap-btn" title="Swap Stations">⇄</button>
+
+        <div class="input-group">
+          <label for="toStation">To Station</label>
+          <select id="toStation" required>
+            <option value="">Select Destination</option>
+            <option value="New Delhi (NDLS)">New Delhi (NDLS)</option>
+            <option value="Mumbai Central (MMCT)">Mumbai Central (MMCT)</option>
+            <option value="Lucknow Charbagh (LKO)">Lucknow Charbagh (LKO)</option>
+            <option value="Bengaluru City (SBC)">Bengaluru City (SBC)</option>
+            <option value="Kolkata Howrah (HWH)">Kolkata Howrah (HWH)</option>
+          </select>
+        </div>
+
+        <div class="input-group">
+          <label for="journeyDate">Journey Date</label>
+          <input type="date" id="journeyDate" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary search-submit">Search Trains</button>
+      </form>
+      <p id="errorBanner" class="error-banner hidden"></p>
+    </section>
+
+    <!-- Available Trains Section -->
+    <section id="trainResultsSection" class="section-block hidden">
+      <div class="section-header">
+        <h2>Available Trains</h2>
+        <span id="routeBadge" class="badge"></span>
+      </div>
+      <div id="trainList" class="train-list"></div>
+    </section>
+
+    <!-- Passenger Booking Card -->
+    <section id="bookingSection" class="card booking-card hidden">
+      <div class="section-header">
+        <h2>Complete Your Booking</h2>
+        <button type="button" id="closeBookingBtn" class="close-btn">✕</button>
+      </div>
+      
+      <div id="selectedTrainBanner" class="train-summary-banner"></div>
+
+      <form id="bookingForm" class="booking-grid">
+        <div class="input-group">
+          <label for="passengerName">Passenger Full Name</label>
+          <input type="text" id="passengerName" placeholder="e.g., Priya Verma" required>
+        </div>
+
+        <div class="input-group">
+          <label for="passengerAge">Age</label>
+          <input type="number" id="passengerAge" min="1" max="120" placeholder="e.g., 26" required>
+        </div>
+
+        <div class="input-group">
+          <label for="travelClass">Coach Class</label>
+          <select id="travelClass" required>
+            <option value="Sleeper (SL)|550">Sleeper (SL) — ₹550</option>
+            <option value="AC 3 Tier (3A)|1350">AC 3 Tier (3A) — ₹1,350</option>
+            <option value="AC 2 Tier (2A)|1950">AC 2 Tier (2A) — ₹1,950</option>
+            <option value="Executive Chair (EC)|2400">Executive Chair (EC) — ₹2,400</option>
+          </select>
+        </div>
+
+        <div class="input-group">
+          <label for="seatCount">Passengers (Max 6)</label>
+          <input type="number" id="seatCount" min="1" max="6" value="1" required>
+        </div>
+
+        <div class="fare-box">
+          <span>Total Fare:</span>
+          <strong id="liveTotalFare">₹550</strong>
+        </div>
+
+        <button type="submit" class="btn btn-success confirm-btn">Confirm & Pay</button>
+      </form>
+    </section>
+
+    <!-- My Booked Tickets -->
+    <section class="section-block">
+      <div class="section-header">
+        <h2>My Booked Tickets</h2>
+        <span id="ticketCountBadge" class="badge badge-neutral">0 Tickets</span>
+      </div>
+      <div id="bookedTicketsList" class="tickets-grid"></div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast hidden"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
